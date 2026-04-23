@@ -11,7 +11,7 @@ export default function Home() {
         <Navbar />
       </header>
 
-      <main className="page-shell py-8 md:py-10">
+      <main>
         <HeroSection />
         <UpcomingSections />
       </main>

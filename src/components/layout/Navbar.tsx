@@ -8,7 +8,7 @@ export default function Navbar() {
         <ul className="flex items-center gap-6 overflow-x-auto whitespace-nowrap text-sm font-medium text-slate-700">
           {navigationItems.slice(0, 3).map((item) => (
             <li key={item.label}>
-              <Link href={item.href} className="transition hover:text-sky-700">
+              <Link href={item.href} className="transition hover:text-[#A70000]">
                 {item.label}
               </Link>
             </li>
@@ -16,7 +16,7 @@ export default function Navbar() {
 
           <li className="relative">
             <details className="group">
-              <summary className="list-none cursor-pointer transition hover:text-sky-700 focus-visible:text-sky-700">
+              <summary className="list-none cursor-pointer transition hover:text-[#A70000] focus-visible:text-sky-700">
                 Categories
               </summary>
               <ul className="absolute left-0 top-9 z-10 w-52 rounded-xl border border-slate-200 bg-white p-2 shadow-lg">
@@ -24,7 +24,7 @@ export default function Navbar() {
                   <li key={category.slug}>
                     <Link
                       href={category.href}
-                      className="block rounded-lg px-3 py-2 text-sm text-slate-700 transition hover:bg-slate-100 hover:text-sky-700"
+                      className="block rounded-lg px-3 py-2 text-sm text-slate-700 transition hover:bg-slate-100 hover:text-[#A70000]"
                     >
                       {category.label}
                     </Link>
@@ -36,7 +36,7 @@ export default function Navbar() {
 
           {navigationItems.slice(3).map((item) => (
             <li key={item.label}>
-              <Link href={item.href} className="transition hover:text-sky-700">
+              <Link href={item.href} className="transition hover:text-[#A70000]">
                 {item.label}
               </Link>
             </li>

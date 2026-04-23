@@ -5,20 +5,20 @@ import { heroActions } from "../../routes/siteRoutes";
 
 export default function HeroSection() {
   return (
-    <section className="relative isolate min-h-[58vh] overflow-hidden rounded-[2rem] bg-slate-100">
+    <section className="relative isolate w-full h-screen overflow-hidden bg-slate-100">
       <Image
         src={heroImage}
         alt="A pharmacist helping a customer choose medicine"
         fill
         priority
-        className="object-cover"
+        className="object-cover w-full"
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/70 to-white/35" />
-
-      <div className="relative z-10 flex min-h-[58vh] max-w-2xl flex-col justify-center gap-5 p-8 md:p-12">
-        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-700">Trusted Community Care</p>
+      <div className="absolute inset-0 bg-gradient-to-r from-white/50 via-white/30" />
+      <div className="page-shell relative z-10 flex h-full flex-col justify-center py-8 md:py-0">
+        <div className="flex max-w-2xl flex-col justify-center gap-5">
+        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#A70000]">Trusted Community Care</p>
         <h1 className="text-4xl font-semibold leading-tight text-slate-900 md:text-5xl">
-          Your Health Comes First at GLG Pharmacy
+          Your Health Comes First at <span className="text-4xl font-semibold leading-tight md:text-5xl text-[#A70000]">GLG Pharmacy</span>
         </h1>
         <p className="max-w-xl text-base leading-7 text-slate-700 md:text-lg">
           Shop quality medicines, refill prescriptions fast, and get friendly support from licensed pharmacists.
@@ -37,6 +37,7 @@ export default function HeroSection() {
               {action.label}
             </Link>
           ))}
+        </div>
         </div>
       </div>
     </section>
