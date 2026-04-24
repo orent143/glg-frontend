@@ -2,14 +2,16 @@ import Link from "next/link";
 import Image from "next/image";
 import searchIcon from "../../assets/image-1.png";
 import { siteRoutes } from "../../routes/siteRoutes";
+import callIcon from "../../assets/image-3.png";
 
 export default function Topbar() {
   return (
     <div className="page-shell py-4">
-      <div className="flex flex-wrap items-center gap-3 md:gap-4">
-        <p className="text-lg font-semibold tracking-wide text-[#1E1E1E]"><span className="text-lg font-semibold tracking-wide text-[#A70000]">GLG</span> Pharmacy.</p>
+      <div className="flex items-center justify-between gap-6">
+      <div className="flex items-center gap-4 flex-1">
+        <p className="text-[20px] font-semibold tracking-wide text-[#1E1E1E]"><span className="text-[20px] font-semibold tracking-wide text-[#A70000]">GLG</span> Pharmacy.</p>
 
-        <div className="relative w-full max-w-[572px] flex-1">
+        <div className="relative flex-1 max-w-[600px]">
           <label htmlFor="search-medicine" className="sr-only">
             Search medicine
           </label>
@@ -27,12 +29,14 @@ export default function Topbar() {
             </button>
           </div>
         </div>
+        </div>
 
+        <div className="flex items-center gap-2">
         <a
           href="tel:+639123456789"
-          className="inline-flex items-center rounded-full border border-sky-800 px-4 py-2 text-sm font-medium text-sky-800 transition hover:bg-sky-800 hover:text-white"
+          className="inline-flex items-center rounded-full border bg-[#A70000] px-4 h-11 text-[14px] font-regular text-white transition hover:bg-[#A70000]/60 hover:text-white gap-2"
         >
-          Call (+63) 912 345 6789
+          <Image src={callIcon} alt="Call" width={15} height={15} /> (+63) 912 345 6789
         </a>
 
         <Link
@@ -57,6 +61,7 @@ export default function Topbar() {
             <circle cx="18" cy="19" r="1.5" />
           </svg>
         </Link>
+        </div>
       </div>
     </div>
   );

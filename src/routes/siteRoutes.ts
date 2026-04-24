@@ -7,7 +7,9 @@ export const siteRoutes = {
   account: "/account",
   cart: "/cart",
   uploadPrescription: "/upload-prescription",
-  category: (slug: string) => `/categories/${slug}` as const,
+
+  category: (slug: string) => `/categories/${slug}` as `/categories/${string}`,
+  product: (slug: string) => `/products/${slug}` as `/products/${string}`,
 } as const;
 
 export const navigationItems = [
