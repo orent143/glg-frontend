@@ -13,11 +13,11 @@ export const siteRoutes = {
 } as const;
 
 export const navigationItems = [
-  { label: "Home", href: siteRoutes.home },
-  { label: "Shop", href: siteRoutes.shop },
-  { label: "Prescriptions", href: siteRoutes.prescriptions },
-  { label: "Services", href: siteRoutes.services },
-  { label: "About", href: siteRoutes.about },
+  { label: "HOME", href: siteRoutes.home },
+  { label: "SHOP", href: siteRoutes.shop },
+  { label: "PRESCRIPTIONS", href: siteRoutes.prescriptions },
+  { label: "SERVICES", href: siteRoutes.services },
+  { label: "ABOUT", href: siteRoutes.about },
 ] as const;
 
 export const categoryItems = [

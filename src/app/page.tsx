@@ -3,6 +3,7 @@ import Navbar from "../components/layout/Navbar";
 import Topbar from "../components/layout/Topbar";
 import UpcomingSections from "../components/sections/UpcomingSections";
 import FeaturedBrands from "../components/sections/FeaturedBrands";
+import Categories from "../components/sections/Categories";
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
       <main>
         <HeroSection />
         <FeaturedBrands />
+        <Categories />
         <UpcomingSections />
       </main>
     </div>

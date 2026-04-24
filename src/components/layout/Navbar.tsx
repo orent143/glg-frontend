@@ -5,7 +5,7 @@ export default function Navbar() {
   return (
     <nav className="border-t border-slate-200">
       <div className="page-shell py-3">
-        <ul className="flex items-center gap-6 overflow-x-auto whitespace-nowrap text-sm font-medium text-slate-700">
+        <ul className="flex items-center gap-6 overflow-x-auto whitespace-nowrap text-sm font-light text-slate-700">
           {navigationItems.slice(0, 3).map((item) => (
             <li key={item.label}>
               <Link href={item.href} className="transition hover:text-[#A70000]">
@@ -17,7 +17,7 @@ export default function Navbar() {
           <li className="relative">
             <details className="group">
               <summary className="list-none cursor-pointer transition hover:text-[#A70000] focus-visible:text-sky-700">
-                Categories
+                CATEGORIES
               </summary>
               <ul className="absolute left-0 top-9 z-10 w-52 rounded-xl border border-slate-200 bg-white p-2 shadow-lg">
                 {categoryItems.map((category) => (
