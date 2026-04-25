@@ -10,6 +10,7 @@ export default function HeroSection() {
         src={heroImage}
         alt="A pharmacist helping a customer choose medicine"
         fill
+        sizes="100vw"
         priority
         className="object-cover w-full"
       />
