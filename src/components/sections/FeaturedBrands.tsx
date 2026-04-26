@@ -70,7 +70,7 @@ export default function FeaturedBrands() {
           </div>
           
           {/* Title */}
-          <h2 className="text-5xl md:text-6xl font-bold text-[#C50000] mb-4 md:mb-6 tracking-tight">
+          <h2 className="text-5xl md:text-6xl font-light text-[#C50000] mb-4 md:mb-6 tracking-tight">
             Featured Brands
           </h2>
           

@@ -191,7 +191,7 @@ export default function UploadPrescription() {
             <div className="bg-white rounded-2xl border border-[#E5E7EB] shadow-sm overflow-hidden">
               {/* Card Header */}
               <div className="px-8 py-6 border-b border-[#E5E7EB] bg-gradient-to-r from-[#FAFAFA] to-white">
-                <h2 className="text-lg font-semibold text-[#1F2937]">
+                <h2 className="text-lg font-light text-[#1F2937]">
                   {isUploaded ? "Prescription Received" : "Upload Prescription"}
                 </h2>
               </div>
