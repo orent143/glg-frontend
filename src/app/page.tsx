@@ -1,13 +1,16 @@
 import HeroSection from "../components/sections/HeroSection";
 import Navbar from "../components/layout/Navbar";
 import Topbar from "../components/layout/Topbar";
-import UpcomingSections from "../components/sections/UpcomingSections";
 import FeaturedBrands from "../components/sections/FeaturedBrands";
 import Categories from "../components/sections/Categories";
 import Promos, { PromoCardOnly } from "../components/sections/Promos";
 import DiscountedProducts from "../components/sections/DiscountedProducts";
 import BestSellingProducts from "../components/sections/BestSellingProducts";
 import FeaturedProducts from "../components/sections/FeaturedProducts";
+import UploadPrescription from "../components/sections/UploadPrescription";
+import HealthTips from "../components/sections/HealthTips";
+import Testimonials from "../components/sections/Testimonials";
+import Footer from "../components/layout/Footer";
 
 export default function Home() {
   return (
@@ -26,8 +29,11 @@ export default function Home() {
         <BestSellingProducts />
         <PromoCardOnly />
         <FeaturedProducts />
-        <UpcomingSections />
+        <UploadPrescription />
+        <HealthTips />
+        <Testimonials />
       </main>
+      <Footer />
     </div>
   );
 }

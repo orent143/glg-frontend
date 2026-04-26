@@ -5,6 +5,7 @@ export const siteRoutes = {
   services: "/services",
   about: "/about",
   account: "/account",
+  categories: "/categories",
   cart: "/cart",
   uploadPrescription: "/upload-prescription",
 

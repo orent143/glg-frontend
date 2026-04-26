@@ -146,7 +146,7 @@ function PromoCard({
 
 export function PromoCardOnly() {
   return (
-    <section className="bg-white py-12 md:py-15 border border-slate-200">
+    <section className="bg-white py-12 md:py-15">
       <div className="px-6 md:px-30">
         <PromoCard {...promos[1]} />
       </div>
