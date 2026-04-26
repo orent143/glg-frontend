@@ -117,7 +117,7 @@ export default function UploadPrescription() {
 
   return (
     <section className="w-full bg-gradient-to-b from-white via-white to-[#F9FAFB] py-16 md:py-24 px-6 md:px-8">
-      <div className="max-w-7xl mx-auto">
+      <div className="px-6 md:px-30">
         <div className="flex">
           <div className="flex flex-col">
             <div className="mb-16 md:mb-20">
