@@ -1,6 +1,9 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
+import Topbar from '@/src/components/layout/Topbar';
+import Navbar from '@/src/components/layout/Navbar';
+import Footer from '@/src/components/layout/Footer';
 
 interface CartItem {
   id: string;
@@ -73,6 +76,9 @@ export default function CartPage() {
   }
 
   return (
+    <section className='flex flex-col'>
+      <Topbar></Topbar>
+      <Navbar></Navbar>
     <main className="page-shell py-12">
       <h1 className="text-3xl font-bold text-slate-900 mb-8">Your Cart</h1>
 
@@ -200,5 +206,7 @@ export default function CartPage() {
         </div>
       </div>
     </main>
+    <footer></footer>
+    </section>
   );
 }
