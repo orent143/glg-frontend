@@ -2,6 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import heroImage from "../../assets/image 7 (1).png";
 import { heroActions } from "../../routes/siteRoutes";
+import HeroCarousel from "./HeroCarousel";
+import { heroCarouselItems } from "@/data/heroCarouselItems";
 
 export default function HeroSection() {
   return (
@@ -15,30 +17,40 @@ export default function HeroSection() {
         className="object-cover w-full"
       />
       <div className="absolute inset-0 bg-gradient-to-r from-white/50 via-white/30" />
-      <div className="page-shell relative z-10 flex h-full flex-col justify-center py-8 md:py-0">
-        <div className="flex max-w-2xl flex-col justify-center gap-5">
-        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#A70000]">Trusted Community Care</p>
-        <h1 className="text-4xl font-semibold leading-tight text-slate-900 md:text-5xl">
-          Your Health Comes First at <span className="text-4xl font-semibold leading-tight md:text-5xl text-[#A70000]">GLG Pharmacy</span>
-        </h1>
-        <p className="max-w-xl text-base leading-7 text-slate-700 md:text-lg">
-          Shop quality medicines, refill prescriptions fast, and get friendly support from licensed pharmacists.
-        </p>
-        <div className="flex flex-wrap pt-2 rounded-[10px]">
-          {heroActions.map((action) => (
-            <Link
-              key={action.label}
-              href={action.href}
-              className={
-                action.variant === "primary"
-                  ? "bg-[#A70000] px-6 py-3 text-sm font-extralight text-white transition hover:bg-[#A70000]/50 rounded-tl-[10px] rounded-bl-[10px]"
-                  : "border border-[#000000]/30 bg-white/80 px-6 py-3 text-sm font-extralight text-[#333333] transition hover:bg-sky-50 rounded-tr-[10px] rounded-br-[10px]"
-              }
-            >
-              {action.label}
-            </Link>
-          ))}
-        </div>
+      <div className="page-shell relative z-10 flex h-full justify-center py-8 md:py-0">
+        {/* Left column - Text content */}
+        <div className="flex w-full flex-col gap-5 md:flex-row md:gap-8 lg:gap-12">
+          <div className="flex max-w-2xl flex-col justify-center gap-5 md:flex-1">
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#A70000]">Trusted Community Care</p>
+            <h1 className="text-4xl font-semibold leading-tight text-slate-900 md:text-5xl">
+              Your Health Comes First at <span className="text-4xl font-semibold leading-tight md:text-5xl text-[#A70000]">GLG Pharmacy</span>
+            </h1>
+            <p className="max-w-xl text-base leading-7 text-slate-700 md:text-lg">
+              Shop quality medicines, refill prescriptions fast, and get friendly support from licensed pharmacists.
+            </p>
+            <div className="flex flex-wrap pt-2 rounded-[10px]">
+              {heroActions.map((action) => (
+                <Link
+                  key={action.label}
+                  href={action.href}
+                  className={
+                    action.variant === "primary"
+                      ? "bg-[#A70000] px-6 py-3 text-sm font-extralight text-white transition hover:bg-[#A70000]/50 rounded-tl-[10px] rounded-bl-[10px]"
+                      : "border border-[#000000]/30 bg-white/80 px-6 py-3 text-sm font-extralight text-[#333333] transition hover:bg-sky-50 rounded-tr-[10px] rounded-br-[10px]"
+                  }
+                >
+                  {action.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Right column - Carousel (hidden on mobile, visible on md and up) */}
+          <div className="hidden md:flex md:flex-1 md:items-center md:justify-center md:min-h-96">
+            <div className="w-full max-w-sm">
+              <HeroCarousel items={heroCarouselItems} maxItems={5} />
+            </div>
+          </div>
         </div>
       </div>
     </section>
