@@ -177,7 +177,7 @@ export default function Testimonials() {
   }, [isHovered]);
 
   return (
-    <section className="bg-white py-12 md:py-16 border border-slate-200">
+    <section className="bg-white py-12 md:py-16 ">
       <div className="px-6 md:px-30">
         {/* Header with Stats */}
         <div className="mb-10">

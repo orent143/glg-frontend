@@ -116,88 +116,86 @@ export default function UploadPrescription() {
   const hasImagePreview = uploadedFile?.type.startsWith("image/") && previewUrl;
 
   return (
-    <section className="w-full bg-gradient-to-b from-white via-white to-[#F9FAFB] py-16 md:py-24 px-6 md:px-8">
-      <div className="px-6 md:px-30">
-        <div className="flex">
-          <div className="flex flex-col">
-            <div className="mb-16 md:mb-20">
-              <div className="inline-flex items-center gap-3 mb-4 px-4 py-2 bg-[#FEE2E2] rounded-full">
+    <section className="w-full bg-gradient-to-b from-white via-white to-[#F9FAFB] py-8 md:py-16 lg:py-24 px-4 md:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
+          {/* Left Column - Content */}
+          <div className="flex flex-col w-full lg:w-1/2">
+            <div className="mb-8 md:mb-12 lg:mb-16">
+              <div className="inline-flex items-center gap-3 mb-3 md:mb-4 px-3 md:px-4 py-2 bg-[#FEE2E2] rounded-full">
                 <Image
                   src={UploadImage}
                   alt="Prescription"
                   width={20}
                   height={20}
-                  className="w-5 h-5"
+                  className="w-4 h-4 md:w-5 md:h-5"
                 />
-                <span className="text-xs font-semibold text-[#991B1B] uppercase tracking-wide">
+                <span className="text-[10px] md:text-xs font-semibold text-[#991B1B] uppercase tracking-wide">
                   Easy & Secure
                 </span>
               </div>
 
-              <h1 className="text-4xl md:text-5xl font-bold text-[#1F2937] mb-4 leading-tight">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#1F2937] mb-3 md:mb-4 leading-tight">
                 Upload Your <span className="text-[#C50000]">Prescription</span>
               </h1>
 
-              <p className="text-lg text-[#6B7280] font-light max-w-2xl leading-relaxed">
+              <p className="text-sm md:text-base lg:text-lg text-[#6B7280] font-light max-w-2xl leading-relaxed">
                 Skip the lines. Upload your doctor's prescription and let our
                 licensed pharmacists verify and process it. Fast, secure, and
                 completely confidential.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-              <div className="lg:col-span-1 flex flex-col justify-center">
-                <div className="space-y-6">
-                  <div>
-                    <h3 className="text-sm font-semibold text-[#6B7280] uppercase tracking-wide mb-6">
-                      Why choose us
-                    </h3>
-                  </div>
+            <div className="space-y-6 md:space-y-8">
+              <div>
+                <h3 className="text-xs md:text-sm font-semibold text-[#6B7280] uppercase tracking-wide mb-4 md:mb-6">
+                  Why choose us
+                </h3>
+              </div>
 
-                  {benefits.map((benefit) => (
-                    <BenefitCard
-                      key={benefit.id}
-                      image={benefit.image}
-                      benefit={benefit.benefit}
+              {benefits.map((benefit) => (
+                <BenefitCard
+                  key={benefit.id}
+                  image={benefit.image}
+                  benefit={benefit.benefit}
+                />
+              ))}
+
+              {/* Trust Badge */}
+              <div className="pt-6 md:pt-8 border-t border-[#E5E7EB]">
+                <p className="text-xs text-[#9CA3AF] font-medium mb-3 md:mb-4 uppercase tracking-wide">
+                  Verified & Trusted
+                </p>
+                <div className="flex items-center gap-3 text-sm text-[#6B7280]">
+                  <svg
+                    className="w-5 h-5 text-[#C50000] flex-shrink-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clipRule="evenodd"
                     />
-                  ))}
-
-                  {/* Trust Badge */}
-                  <div className="pt-8 border-t border-[#E5E7EB]">
-                    <p className="text-xs text-[#9CA3AF] font-medium mb-4 uppercase tracking-wide">
-                      Verified & Trusted
-                    </p>
-                    <div className="flex items-center gap-3 text-sm text-[#6B7280]">
-                      <svg
-                        className="w-5 h-5 text-[#C50000]"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                      Licensed Pharmacy Partners
-                    </div>
-                  </div>
+                  </svg>
+                  Licensed Pharmacy Partners
                 </div>
               </div>
             </div>
           </div>
+
           {/* Right Column - Upload Card */}
-          <div className="lg:col-span-2 w-[450px] h-[100%]">
+          <div className="w-full lg:w-1/2">
             <div className="bg-white rounded-2xl border border-[#E5E7EB] shadow-sm overflow-hidden">
               {/* Card Header */}
-              <div className="px-8 py-6 border-b border-[#E5E7EB] bg-gradient-to-r from-[#FAFAFA] to-white">
-                <h2 className="text-lg font-light text-[#1F2937]">
+              <div className="px-4 md:px-6 lg:px-8 py-4 md:py-6 border-b border-[#E5E7EB] bg-gradient-to-r from-[#FAFAFA] to-white">
+                <h2 className="text-base md:text-lg font-light text-[#1F2937]">
                   {isUploaded ? "Prescription Received" : "Upload Prescription"}
                 </h2>
               </div>
 
               {/* Card Content */}
-              <div className="px-8 py-8">
+              <div className="px-4 md:px-6 lg:px-8 py-6 md:py-8">
                 {!uploadedFile ? (
                   /* Empty State - Drag & Drop */
                   <div
@@ -218,14 +216,14 @@ export default function UploadPrescription() {
                       className="hidden"
                     />
 
-                    <div className="py-12 px-6 text-center">
-                      <div className="mb-4 flex justify-center">
+                    <div className="py-8 md:py-12 px-4 md:px-6 text-center">
+                      <div className="mb-3 md:mb-4 flex justify-center">
                         <div
                           className={`p-3 rounded-lg transition-colors duration-300 ${isDragging ? "bg-[#C50000]/10" : "bg-[#E5E7EB]/50"
                             }`}
                         >
                           <svg
-                            className={`w-8 h-8 transition-colors duration-300 ${isDragging ? "text-[#C50000]" : "text-[#9CA3AF]"
+                            className={`w-6 md:w-8 h-6 md:h-8 transition-colors duration-300 ${isDragging ? "text-[#C50000]" : "text-[#9CA3AF]"
                               }`}
                             fill="none"
                             stroke="currentColor"
@@ -245,29 +243,29 @@ export default function UploadPrescription() {
                         <button
                           type="button"
                           onClick={() => fileInputRef.current?.click()}
-                          className="font-semibold text-[#C50000] hover:text-[#A40000] transition-colors duration-150 text-base"
+                          className="font-semibold text-[#C50000] hover:text-[#A40000] transition-colors duration-150 text-sm md:text-base"
                         >
                           Click to upload
                         </button>
-                        <span className="text-[#6B7280] font-light">
+                        <span className="text-[#6B7280] font-light text-sm md:text-base">
                           {" "}
                           or drag and drop
                         </span>
                       </p>
 
-                      <p className="text-sm text-[#9CA3AF] font-light">
+                      <p className="text-xs md:text-sm text-[#9CA3AF] font-light">
                         PDF, JPG, or PNG (up to 10MB)
                       </p>
                     </div>
                   </div>
                 ) : isUploaded ? (
                   /* Success State */
-                  <div className="py-8 px-6">
+                  <div className="py-6 md:py-8">
                     {/* Success Icon */}
-                    <div className="flex justify-center mb-6">
-                      <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#DCFCE7] to-[#F0FDF4] flex items-center justify-center">
+                    <div className="flex justify-center mb-4 md:mb-6">
+                      <div className="w-14 md:w-16 h-14 md:h-16 rounded-full bg-gradient-to-br from-[#DCFCE7] to-[#F0FDF4] flex items-center justify-center">
                         <svg
-                          className="w-8 h-8 text-[#16A34A]"
+                          className="w-6 md:w-8 h-6 md:h-8 text-[#16A34A]"
                           fill="currentColor"
                           viewBox="0 0 20 20"
                         >
@@ -280,19 +278,19 @@ export default function UploadPrescription() {
                       </div>
                     </div>
 
-                    <h3 className="text-lg font-semibold text-[#1F2937] text-center mb-2">
+                    <h3 className="text-base md:text-lg font-semibold text-[#1F2937] text-center mb-2">
                       Prescription received
                     </h3>
-                    <p className="text-sm text-[#6B7280] text-center mb-8">
+                    <p className="text-xs md:text-sm text-[#6B7280] text-center mb-6 md:mb-8">
                       Your prescription is being verified by our licensed
                       pharmacists.
                     </p>
 
                     {/* File Info Card */}
-                    <div className="bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg p-4 mb-8">
-                      <div className="flex items-center gap-4">
+                    <div className="bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg p-3 md:p-4 mb-6 md:mb-8">
+                      <div className="flex items-center gap-3 md:gap-4">
                         {hasImagePreview ? (
-                          <div className="w-14 h-14 rounded-lg overflow-hidden flex-shrink-0 bg-[#E5E7EB]">
+                          <div className="w-12 md:w-14 h-12 md:h-14 rounded-lg overflow-hidden flex-shrink-0 bg-[#E5E7EB]">
                             <img
                               src={previewUrl}
                               alt="Preview"
@@ -300,9 +298,9 @@ export default function UploadPrescription() {
                             />
                           </div>
                         ) : (
-                          <div className="w-14 h-14 bg-[#FEE2E2] rounded-lg flex items-center justify-center flex-shrink-0">
+                          <div className="w-12 md:w-14 h-12 md:h-14 bg-[#FEE2E2] rounded-lg flex items-center justify-center flex-shrink-0">
                             <svg
-                              className="w-7 h-7 text-[#C50000]"
+                              className="w-6 md:w-7 h-6 md:h-7 text-[#C50000]"
                               fill="currentColor"
                               viewBox="0 0 20 20"
                             >
@@ -311,7 +309,7 @@ export default function UploadPrescription() {
                           </div>
                         )}
                         <div className="flex-1 min-w-0">
-                          <p className="text-sm font-semibold text-[#1F2937] truncate">
+                          <p className="text-xs md:text-sm font-semibold text-[#1F2937] truncate">
                             {uploadedFile?.name}
                           </p>
                           <p className="text-xs text-[#9CA3AF] mt-1">
@@ -328,7 +326,7 @@ export default function UploadPrescription() {
                     </div>
 
                     {/* Timeline Info */}
-                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-8">
+                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 md:p-4 mb-6 md:mb-8">
                       <div className="flex gap-3">
                         <svg
                           className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5"
@@ -342,7 +340,7 @@ export default function UploadPrescription() {
                           />
                         </svg>
                         <div>
-                          <p className="text-sm font-semibold text-blue-900">
+                          <p className="text-xs md:text-sm font-semibold text-blue-900">
                             Usually verified within 2 hours
                           </p>
                           <p className="text-xs text-blue-700 mt-1">
@@ -356,18 +354,18 @@ export default function UploadPrescription() {
                     <button
                       type="button"
                       onClick={handleReset}
-                      className="w-full py-2.5 px-4 text-sm font-medium text-[#6B7280] bg-white border border-[#D1D5DB] rounded-lg hover:bg-[#F9FAFB] transition-colors duration-150"
+                      className="w-full py-2 md:py-2.5 px-4 text-xs md:text-sm font-medium text-[#6B7280] bg-white border border-[#D1D5DB] rounded-lg hover:bg-[#F9FAFB] transition-colors duration-150"
                     >
                       Upload Another File
                     </button>
                   </div>
                 ) : (
                   /* File Selected State (Before Upload) */
-                  <div className="py-8 px-6">
+                  <div className="py-6 md:py-8">
                     {/* File Preview */}
-                    <div className="flex justify-center mb-8">
+                    <div className="flex justify-center mb-6 md:mb-8">
                       {hasImagePreview ? (
-                        <div className="w-20 h-20 rounded-xl overflow-hidden bg-[#E5E7EB] shadow-sm">
+                        <div className="w-16 md:w-20 h-16 md:h-20 rounded-xl overflow-hidden bg-[#E5E7EB] shadow-sm">
                           <img
                             src={previewUrl}
                             alt="Preview"
@@ -375,9 +373,9 @@ export default function UploadPrescription() {
                           />
                         </div>
                       ) : (
-                        <div className="w-20 h-20 bg-gradient-to-br from-[#FEE2E2] to-[#FECACA] rounded-xl flex items-center justify-center shadow-sm">
+                        <div className="w-16 md:w-20 h-16 md:h-20 bg-gradient-to-br from-[#FEE2E2] to-[#FECACA] rounded-xl flex items-center justify-center shadow-sm">
                           <svg
-                            className="w-10 h-10 text-[#C50000]"
+                            className="w-8 md:w-10 h-8 md:h-10 text-[#C50000]"
                             fill="currentColor"
                             viewBox="0 0 20 20"
                           >
@@ -387,29 +385,29 @@ export default function UploadPrescription() {
                       )}
                     </div>
 
-                    <h3 className="text-lg font-semibold text-[#1F2937] mb-1 text-center truncate">
+                    <h3 className="text-base md:text-lg font-semibold text-[#1F2937] mb-1 text-center truncate">
                       {uploadedFile?.name}
                     </h3>
-                    <p className="text-sm text-[#6B7280] text-center mb-8">
+                    <p className="text-xs md:text-sm text-[#6B7280] text-center mb-6 md:mb-8">
                       {formatFileSize(uploadedFile?.size || 0)}
                     </p>
 
                     {/* Action Buttons */}
-                    <div className="flex flex-col gap-3">
+                    <div className="flex flex-col gap-2 md:gap-3">
                       <button
                         type="button"
                         onClick={handleUpload}
                         disabled={isUploading}
-                        className="w-full py-3 px-4 font-semibold text-white bg-[#C50000] hover:bg-[#A40000] disabled:bg-[#D1D5DB] disabled:cursor-not-allowed transition-colors duration-150 rounded-lg"
+                        className="w-full py-2 md:py-3 px-4 font-semibold text-white text-sm md:text-base bg-[#C50000] hover:bg-[#A40000] disabled:bg-[#D1D5DB] disabled:cursor-not-allowed transition-colors duration-150 rounded-lg"
                       >
                         {isUploading ? "Uploading..." : "Upload Prescription"}
                       </button>
 
-                      <div className="grid grid-cols-2 gap-3">
+                      <div className="grid grid-cols-2 gap-2 md:gap-3">
                         <button
                           type="button"
                           onClick={() => fileInputRef.current?.click()}
-                          className="py-2.5 px-4 text-sm font-medium text-[#6B7280] bg-white border border-[#D1D5DB] rounded-lg hover:bg-[#F9FAFB] transition-colors duration-150"
+                          className="py-2 md:py-2.5 px-3 md:px-4 text-xs md:text-sm font-medium text-[#6B7280] bg-white border border-[#D1D5DB] rounded-lg hover:bg-[#F9FAFB] transition-colors duration-150"
                         >
                           Change File
                         </button>
@@ -417,7 +415,7 @@ export default function UploadPrescription() {
                         <button
                           type="button"
                           onClick={handleReset}
-                          className="py-2.5 px-4 text-sm font-medium text-[#6B7280] bg-white border border-[#D1D5DB] rounded-lg hover:bg-[#F9FAFB] transition-colors duration-150"
+                          className="py-2 md:py-2.5 px-3 md:px-4 text-xs md:text-sm font-medium text-[#6B7280] bg-white border border-[#D1D5DB] rounded-lg hover:bg-[#F9FAFB] transition-colors duration-150"
                         >
                           Clear
                         </button>
@@ -425,7 +423,7 @@ export default function UploadPrescription() {
                     </div>
 
                     {/* Reassurance Text */}
-                    <p className="text-xs text-[#9CA3AF] text-center mt-6 leading-relaxed">
+                    <p className="text-xs text-[#9CA3AF] text-center mt-4 md:mt-6 leading-relaxed">
                       Your prescription is encrypted and processed securely.
                       We'll verify it with licensed pharmacists.
                     </p>
@@ -434,7 +432,7 @@ export default function UploadPrescription() {
               </div>
 
               {/* Card Footer */}
-              <div className="px-8 py-4 bg-[#F9FAFB] border-t border-[#E5E7EB]">
+              <div className="px-4 md:px-6 lg:px-8 py-3 md:py-4 bg-[#F9FAFB] border-t border-[#E5E7EB]">
                 <p className="text-xs text-[#9CA3AF] text-center">
                   <span className="font-semibold">Supported formats:</span> PDF,
                   JPG, PNG • <span className="font-semibold">Max size:</span>{" "}

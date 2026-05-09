@@ -156,7 +156,7 @@ export function PromoCardOnly() {
 
 export default function Promos() {
   return (
-    <section className="bg-white py-12 md:py-15 border border-slate-200">
+    <section className="bg-white py-12 md:py-10">
       {/* Header */}
       <div className="p-6 md:px-30 md:py-8 mb-3">
         <p className="text-2xl font-semibold text-[#A70000] uppercase">

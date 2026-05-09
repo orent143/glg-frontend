@@ -12,26 +12,33 @@ const category = [
 
 export default function Categories() {
     return (
-        <section className="mt-8 border border-slate-200 bg-white p-6 md:mt-10 md:px-30">
+        <section className="bg-white p-6 md:px-30">
             {/* Header */}
-            <div className="flex flex-col">
-                <p className="text-2xl font-semibold text-[#780000] uppercase">
-                    Shop by Categories
-                </p>
-                <h2 className="text-lg font-light text-slate-600">
-                    View all products per category
-                </h2>
+            <div className='flex w-full'>
+                <div className="flex flex-col w-[50%]">
+                    <p className="text-2xl font-semibold text-[#A70000] uppercase">
+                        Popular Categories
+                    </p>
+                    <h2 className="text-lg font-light text-slate-600">
+                        View all products per category
+                    </h2>
+                </div>
+                <div className='flex w-[50%] justify-end items-center'>
+                    <button className='p-2 h-[70%] text-[15px] rounded-lg bg-[#A70000] text-white hover:bg-[#780000]'>
+                        See all
+                    </button>
+                </div>
             </div>
 
             {/* Grid */}
             <div className="flex flex-wrap justify-center gap-10 mt-6">
-                {category.map((item) => (
+                {category.slice(0, 4).map(item => (
                     <div
                         key={item.id}
                         className="group cursor-pointer w-[calc(50%-20px)] sm:w-[calc(33.333%-27px)] md:w-[calc(25%-30px)]"
                     >
                         {/* Image Card */}
-                        <div className="relative w-full h-40 rounded-2xl overflow-hidden shadow-md group-hover:shadow-xl transition-all duration-300">
+                        <div className="relative w-full h-80 overflow-hidden shadow-md group-hover:shadow-xl transition-all duration-300">
                             <Image
                                 src={item.image}
                                 alt={item.name}
@@ -39,12 +46,12 @@ export default function Categories() {
                                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                                 className="object-cover group-hover:scale-105 transition-transform duration-500"
                             />
+                            {/* Text on Image */}
+                            <span className="absolute bottom-3 left-3 bg-black/50 text-white text-sm px-2 py-1 rounded">
+                                {item.name}
+                            </span>
                         </div>
 
-                        {/* Label */}
-                        <p className="mt-3 text-center text-sm font-medium text-slate-800 group-hover:text-[#780000] transition-colors">
-                            {item.name}
-                        </p>
                     </div>
                 ))}
             </div>

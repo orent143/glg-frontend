@@ -22,7 +22,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
   return (
     <div className="flex-shrink-0 w-56 group">
-      <div className="bg-white rounded-2xl border border-slate-100 overflow-hidden shadow-md hover:shadow-1xl transition-all duration-500 h-full flex flex-col hover:border-red-100">
+      <div className="bg-white border border-slate-100 overflow-hidden shadow-md hover:shadow-1xl transition-all duration-500 h-full flex flex-col hover:border-red-100">
         <div className="relative h-56 bg-gradient-to-br from-slate-50 to-slate-100 overflow-hidden flex items-center justify-center">
           <Image
             src={product.image}
