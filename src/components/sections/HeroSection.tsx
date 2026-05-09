@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import heroImage from "../../assets/image 7 (1).png";
+import heroImage from "../../assets/image7(1).png";
 import { heroActions } from "../../routes/siteRoutes";
 
 export default function HeroSection() {
@@ -15,7 +15,7 @@ export default function HeroSection() {
         className="object-cover w-full"
       />
       <div className="absolute inset-0 bg-gradient-to-r from-white/50 via-white/30" />
-      <div className="page-shell relative z-10 flex h-full flex-col justify-center py-8 md:py-0">
+      <div className="page-shell relative z-10 flex h-full justify-center py-8 md:py-0">
         <div className="flex max-w-2xl flex-col justify-center gap-5">
         <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#A70000]">Trusted Community Care</p>
         <h1 className="text-4xl font-semibold leading-tight text-slate-900 md:text-5xl">
@@ -40,6 +40,7 @@ export default function HeroSection() {
           ))}
         </div>
         </div>
+        <div className="w-full"></div>
       </div>
     </section>
   );
