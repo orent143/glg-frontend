@@ -5,9 +5,11 @@ import { categoryItems, navigationItems } from "../../routes/siteRoutes";
 
 export default function Navbar() {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const [isAuthDropdownOpen, setAuthDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
   const triggerRef = useRef<HTMLButtonElement>(null);
+  const authTriggerRef = useRef<HTMLButtonElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
 
@@ -30,8 +32,11 @@ export default function Navbar() {
   // Handle scroll to reposition dropdown
   useEffect(() => {
     if (isDropdownOpen) {
-      window.addEventListener("scroll", updateDropdownPosition);
-      return () => window.removeEventListener("scroll", updateDropdownPosition);
+      const handleScroll = () => {
+        updateDropdownPosition();
+      };
+      window.addEventListener("scroll", handleScroll);
+      return () => window.removeEventListener("scroll", handleScroll);
     }
   }, [isDropdownOpen]);
 
@@ -84,35 +89,37 @@ export default function Navbar() {
       <nav className="sticky top-0 z-40 border-b border-slate-200 bg-white">
         <div className="page-shell py-3">
           {/* Desktop Navigation */}
-          <ul className="hidden md:flex items-center gap-6 overflow-x-auto whitespace-nowrap text-sm font-light text-slate-700">
-            {navigationItems.slice(0, 3).map((item) => (
-              <li key={item.label}>
-                <Link href={item.href} className="transition hover:text-[#A70000]">
-                  {item.label}
-                </Link>
-              </li>
-            ))}
+          <div className="hidden md:flex items-center justify-between">
+            <ul className="flex items-center gap-6 overflow-x-auto whitespace-nowrap text-sm font-light text-slate-700">
+              {navigationItems.slice(0, 3).map((item) => (
+                <li key={item.label}>
+                  <Link href={item.href} className="transition hover:text-[#A70000]">
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
 
-            <li>
-              <button
-                ref={triggerRef}
-                onClick={() => setDropdownOpen(!isDropdownOpen)}
-                aria-expanded={isDropdownOpen}
-                aria-controls="category-dropdown"
-                className="cursor-pointer transition hover:text-[#A70000] focus-visible:text-sky-700 focus:outline-none"
-              >
-                CATEGORIES
-              </button>
-            </li>
-
-            {navigationItems.slice(3).map((item) => (
-              <li key={item.label}>
-                <Link href={item.href} className="transition hover:text-[#A70000]">
-                  {item.label}
-                </Link>
+              <li>
+                <button
+                  ref={triggerRef}
+                  onClick={() => setDropdownOpen(!isDropdownOpen)}
+                  aria-expanded={isDropdownOpen}
+                  aria-controls="category-dropdown"
+                  className="cursor-pointer transition hover:text-[#A70000] focus-visible:text-sky-700 focus:outline-none"
+                >
+                  CATEGORIES
+                </button>
               </li>
-            ))}
-          </ul>
+
+              {navigationItems.slice(3).map((item) => (
+                <li key={item.label}>
+                  <Link href={item.href} className="transition hover:text-[#A70000]">
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
 
           {/* Mobile Menu Toggle */}
           <div className="md:hidden flex items-center justify-between">

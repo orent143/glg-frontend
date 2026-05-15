@@ -8,25 +8,30 @@ import { siteRoutes } from "../../routes/siteRoutes";
 import callIcon from "../../assets/image-3.png";
 
 export default function Topbar() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const accountMenuRef = useRef<HTMLDivElement>(null);
 
-  // Close menu when clicking outside
+  // Close menus when clicking outside
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setIsMenuOpen(false);
+      if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target as Node)) {
+        setIsMobileMenuOpen(false);
+      }
+      if (accountMenuRef.current && !accountMenuRef.current.contains(event.target as Node)) {
+        setIsAccountMenuOpen(false);
       }
     }
 
-    if (isMenuOpen) {
+    if (isMobileMenuOpen || isAccountMenuOpen) {
       document.addEventListener("mousedown", handleClickOutside);
     }
 
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [isMenuOpen]);
+  }, [isMobileMenuOpen, isAccountMenuOpen]);
 
   return (
     <div className="page-shell py-4">
@@ -69,17 +74,6 @@ export default function Topbar() {
           </a>
 
           <Link
-            href={siteRoutes.account}
-            aria-label="Open account"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-300 text-slate-700 transition hover:border-sky-500 hover:text-sky-600"
-          >
-            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8">
-              <path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" />
-              <path d="M5 20a7 7 0 0 1 14 0" />
-            </svg>
-          </Link>
-
-          <Link
             href={siteRoutes.cart}
             aria-label="Open cart"
             className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-300 text-slate-700 transition hover:border-sky-500 hover:text-sky-600"
@@ -90,12 +84,49 @@ export default function Topbar() {
               <circle cx="18" cy="19" r="1.5" />
             </svg>
           </Link>
+
+                  {/* Account Button */}
+        <div className="relative" ref={accountMenuRef}>
+          <button
+            onClick={() => setIsAccountMenuOpen(!isAccountMenuOpen)}
+            aria-label="Account options"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-300 text-slate-700 transition hover:border-sky-500 hover:text-sky-600"
+          >
+            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8">
+              <path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" />
+              <path d="M5 20a7 7 0 0 1 14 0" />
+            </svg>
+          </button>
+
+          {isAccountMenuOpen && (
+            <div
+              className="absolute right-0 top-full mt-2 w-44 rounded-lg border border-slate-200 bg-white shadow-lg z-50"
+            >
+              <div className="p-2 flex flex-col gap-2">
+                <Link
+                  href="/auth/signin"
+                  className="block rounded-lg px-3 py-2.5 text-sm text-slate-700 transition hover:bg-slate-50"
+                  onClick={() => setIsAccountMenuOpen(false)}
+                >
+                  Login
+                </Link>
+                <Link
+                  href="/auth/signup"
+                  className="block rounded-lg px-3 py-2.5 text-sm text-white bg-slate-900 transition hover:bg-slate-800"
+                  onClick={() => setIsAccountMenuOpen(false)}
+                >
+                  Sign Up
+                </Link>
+              </div>
+            </div>
+          )}
+        </div>
         </div>
 
         {/* Mobile View - Menu Toggle Button */}
-        <div className="md:hidden relative" ref={menuRef}>
+        <div className="md:hidden relative" ref={mobileMenuRef}>
           <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
             className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-300 text-slate-700 transition hover:border-sky-500 hover:text-sky-600"
           >
@@ -105,38 +136,24 @@ export default function Topbar() {
           </button>
 
           {/* Popout Menu */}
-          {isMenuOpen && (
+          {isMobileMenuOpen && (
             <div className="absolute right-0 top-full mt-2 w-56 rounded-lg border border-slate-300 bg-white shadow-lg z-50">
               <div className="flex flex-col gap-3 p-4">
                 {/* Call Button */}
                 <a
                   href="tel:+639123456789"
                   className="inline-flex items-center rounded-full border bg-[#A70000] px-4 py-2 text-[14px] font-regular text-white transition hover:bg-[#A70000]/60 hover:text-white gap-2 justify-center"
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={() => setIsMobileMenuOpen(false)}
                 >
                   <Image src={callIcon} alt="Call" width={15} height={15} /> Call Now
                 </a>
-
-                {/* Account Link */}
-                <Link
-                  href={siteRoutes.account}
-                  aria-label="Open account"
-                  className="inline-flex items-center justify-center rounded-full border border-slate-300 text-slate-700 transition hover:border-sky-500 hover:text-sky-600 py-2 gap-2 font-medium"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8">
-                    <path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" />
-                    <path d="M5 20a7 7 0 0 1 14 0" />
-                  </svg>
-                  My Account
-                </Link>
 
                 {/* Cart Link */}
                 <Link
                   href={siteRoutes.cart}
                   aria-label="Open cart"
                   className="inline-flex items-center justify-center rounded-full border border-slate-300 text-slate-700 transition hover:border-sky-500 hover:text-sky-600 py-2 gap-2 font-medium"
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={() => setIsMobileMenuOpen(false)}
                 >
                   <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8">
                     <path d="M3 4h2l2.3 10.2a1 1 0 0 0 1 .8h9.8a1 1 0 0 0 1-.8L21 7H7" />
@@ -149,6 +166,7 @@ export default function Topbar() {
             </div>
           )}
         </div>
+
       </div>
     </div>
   );

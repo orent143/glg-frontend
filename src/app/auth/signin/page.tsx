@@ -4,13 +4,11 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-export default function CustomerSignup() {
+export default function CustomerSignin() {
     const router = useRouter();
     const [formData, setFormData] = useState({
-        fullName: "",
         email: "",
         password: "",
-        confirmPassword: "",
     });
     const [errors, setErrors] = useState<Record<string, string>>({});
     const [isLoading, setIsLoading] = useState(false);
@@ -18,10 +16,6 @@ export default function CustomerSignup() {
 
     const validateForm = () => {
         const newErrors: Record<string, string> = {};
-
-        if (!formData.fullName.trim()) {
-            newErrors.fullName = "Full name is required";
-        }
 
         if (!formData.email.trim()) {
             newErrors.email = "Email address is required";
@@ -31,14 +25,6 @@ export default function CustomerSignup() {
 
         if (!formData.password) {
             newErrors.password = "Password is required";
-        } else if (formData.password.length < 8) {
-            newErrors.password = "Password must be at least 8 characters";
-        }
-
-        if (!formData.confirmPassword) {
-            newErrors.confirmPassword = "Please confirm your password";
-        } else if (formData.password !== formData.confirmPassword) {
-            newErrors.confirmPassword = "Passwords do not match";
         }
 
         setErrors(newErrors);
@@ -64,7 +50,7 @@ export default function CustomerSignup() {
         setIsLoading(true);
 
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/auth/signup`, {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/auth/signin`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -72,12 +58,11 @@ export default function CustomerSignup() {
                 body: JSON.stringify({
                     email: formData.email,
                     password: formData.password,
-                    fullName: formData.fullName,
                 }),
             });
 
             if (!response.ok) {
-                let errorMessage = "Signup failed. Please try again.";
+                let errorMessage = "Sign in failed. Please try again.";
                 try {
                     const errorData = await response.json();
                     if (errorData?.error) {
@@ -91,11 +76,18 @@ export default function CustomerSignup() {
                 throw new Error(errorMessage);
             }
 
-            // Redirect to verification page
-            router.push("/auth/verify?email=" + encodeURIComponent(formData.email));
+            const data = await response.json();
+            
+            // Store authentication token if provided
+            if (data?.token) {
+                localStorage.setItem("authToken", data.token);
+            }
+
+            // Redirect to home or dashboard
+            router.push("/");
         } catch (error) {
             setSubmitError(
-                error instanceof Error ? error.message : "An error occurred during signup. Please try again."
+                error instanceof Error ? error.message : "An error occurred during sign in. Please try again."
             );
         } finally {
             setIsLoading(false);
@@ -111,7 +103,7 @@ export default function CustomerSignup() {
                     <div className="flex items-center gap-2">
                         <img src="/Kliyente.png" alt="GLG Pharmacy" className="w-8 h-8" />
                         <div className="flex items-baseline gap-1">
-                            <span className="text-xl font-semibold text-gray-900">GLG</span>
+                            <span className="text-xl font-semibold text-[#A70000]">GLG</span>
                             <span className="text-sm text-gray-600">Pharmacy</span>
                         </div>
                     </div>
@@ -119,39 +111,39 @@ export default function CustomerSignup() {
                     {/* Info Section */}
                     <div className="mt-16">
                         <h2 className="text-2xl font-semibold text-gray-900 mb-6">
-                            Secure access to your prescriptions and orders
+                            Manage your prescriptions with confidence
                         </h2>
                         <div className="space-y-4 text-gray-600 text-sm leading-relaxed">
-                            <p>✓ View and manage your prescription history</p>
-                            <p>✓ Track medication deliveries in real-time</p>
-                            <p>✓ Store medical records safely in one place</p>
-                            <p>✓ Receive automated refill reminders</p>
+                            <p>✓ Quick and secure access to your account</p>
+                            <p>✓ Track all your medication orders and deliveries</p>
+                            <p>✓ View your complete prescription history</p>
+                            <p>✓ Manage refill requests with ease</p>
                         </div>
                     </div>
                 </div>
 
                 {/* Footer trust text */}
                 <p className="text-xs text-gray-500 leading-relaxed">
-                    Your data is encrypted and used only for account and prescription management. We comply with healthcare data protection standards.
+                    Your login is protected with encryption. We comply with healthcare data protection standards and never share your information.
                 </p>
             </div>
 
-            {/* Right Panel - Signup Form */}
+            {/* Right Panel - Sign In Form */}
             <div className="flex flex-col w-full md:w-1/2 p-8 md:p-16 justify-center">
                 <div className="w-full max-w-md mx-auto">
                     {/* Mobile Logo */}
                     <div className="md:hidden flex items-center gap-2 mb-12">
                         <img src="/Kliyente.png" alt="GLG Pharmacy" className="w-8 h-8" />
                         <div className="flex items-baseline gap-1">
-                            <span className="text-xl font-semibold text-[#A70000]">GLG</span>
+                            <span className="text-xl font-semibold text-gray-900">GLG</span>
                             <span className="text-sm text-gray-600">Pharmacy</span>
                         </div>
                     </div>
 
                     {/* Form Header */}
                     <div className="mb-8">
-                        <h1 className="text-2xl font-semibold text-gray-900 mb-2">Create your account</h1>
-                        <p className="text-gray-600 text-sm">Join GLG Pharmacy to manage your prescriptions</p>
+                        <h1 className="text-2xl font-semibold text-gray-900 mb-2">Sign in to your account</h1>
+                        <p className="text-gray-600 text-sm">Access your prescriptions and orders</p>
                     </div>
 
                     {/* Error Alert */}
@@ -163,28 +155,6 @@ export default function CustomerSignup() {
 
                     {/* Form */}
                     <form onSubmit={handleSubmit} className="space-y-4">
-                        {/* Full Name */}
-                        <div>
-                            <label htmlFor="fullName" className="block text-sm font-medium text-gray-900 mb-2">
-                                Full name
-                            </label>
-                            <input
-                                id="fullName"
-                                name="fullName"
-                                type="text"
-                                value={formData.fullName}
-                                onChange={handleChange}
-                                className={`w-full px-4 py-2.5 border rounded-lg text-sm transition-colors ${errors.fullName
-                                        ? "border-red-300 bg-red-50"
-                                        : "border-gray-300 bg-white focus:border-gray-900 focus:ring-0"
-                                    } focus:outline-none`}
-                                placeholder="John Doe"
-                            />
-                            {errors.fullName && (
-                                <p className="mt-1 text-xs text-red-600">{errors.fullName}</p>
-                            )}
-                        </div>
-
                         {/* Email */}
                         <div>
                             <label htmlFor="email" className="block text-sm font-medium text-gray-900 mb-2">
@@ -222,33 +192,21 @@ export default function CustomerSignup() {
                                         ? "border-red-300 bg-red-50"
                                         : "border-gray-300 bg-white focus:border-gray-900 focus:ring-0"
                                     } focus:outline-none`}
-                                placeholder="At least 8 characters"
+                                placeholder="Enter your password"
                             />
                             {errors.password && (
                                 <p className="mt-1 text-xs text-red-600">{errors.password}</p>
                             )}
                         </div>
 
-                        {/* Confirm Password */}
-                        <div>
-                            <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-900 mb-2">
-                                Confirm password
-                            </label>
-                            <input
-                                id="confirmPassword"
-                                name="confirmPassword"
-                                type="password"
-                                value={formData.confirmPassword}
-                                onChange={handleChange}
-                                className={`w-full px-4 py-2.5 border rounded-lg text-sm transition-colors ${errors.confirmPassword
-                                        ? "border-red-300 bg-red-50"
-                                        : "border-gray-300 bg-white focus:border-gray-900 focus:ring-0"
-                                    } focus:outline-none`}
-                                placeholder="Confirm your password"
-                            />
-                            {errors.confirmPassword && (
-                                <p className="mt-1 text-xs text-red-600">{errors.confirmPassword}</p>
-                            )}
+                        {/* Forgot Password Link */}
+                        <div className="flex justify-end">
+                            <Link
+                                href="/auth/forgot-password"
+                                className="text-xs text-gray-600 hover:text-gray-900 transition"
+                            >
+                                Forgot password?
+                            </Link>
                         </div>
 
                         {/* Submit Button */}
@@ -257,23 +215,23 @@ export default function CustomerSignup() {
                             disabled={isLoading}
                             className="w-full bg-gray-900 hover:bg-gray-800 disabled:bg-gray-400 text-white font-medium py-2.5 px-4 rounded-lg transition-colors mt-6 text-sm"
                         >
-                            {isLoading ? "Creating account..." : "Create account"}
+                            {isLoading ? "Signing in..." : "Sign in"}
                         </button>
                     </form>
 
-                    {/* System Message */}
+                    {/* Security Note */}
                     <div className="mt-6 p-3 bg-blue-50 border border-blue-200 rounded-lg">
                         <p className="text-xs text-blue-900 leading-relaxed">
-                            After creating your account, we will send a verification code to your email. Please check your inbox and spam folder.
+                            Your login credentials are encrypted and never stored in plain text. We use industry-standard security protocols.
                         </p>
                     </div>
 
-                    {/* Sign In Link */}
+                    {/* Sign Up Link */}
                     <div className="mt-6 text-center">
                         <p className="text-sm text-gray-600">
-                            Already have an account?{" "}
-                            <Link href="/auth/signin" className="text-gray-900 font-medium hover:underline">
-                                Sign in
+                            Don't have an account?{" "}
+                            <Link href="/auth/signup" className="text-gray-900 font-medium hover:underline">
+                                Sign up
                             </Link>
                         </p>
                     </div>
