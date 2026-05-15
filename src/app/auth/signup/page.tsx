@@ -92,7 +92,7 @@ export default function CustomerSignup() {
             }
 
             // Redirect to verification page
-            router.push("/verify-email?email=" + encodeURIComponent(formData.email));
+            router.push("/auth/verify?email=" + encodeURIComponent(formData.email));
         } catch (error) {
             setSubmitError(
                 error instanceof Error ? error.message : "An error occurred during signup. Please try again."

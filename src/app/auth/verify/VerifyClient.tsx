@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { supabase } from "@/src/lib/supabaseClient";
 
 type VerificationStatus = "idle" | "loading" | "success" | "error" | "expired";
 
@@ -10,20 +11,10 @@ export default function VerifyClient() {
     const searchParams = useSearchParams();
     const email = searchParams.get("email") || "";
 
-    const [otp, setOtp] = useState(["", "", "", "", "", ""]);
+    const [otp, setOtp] = useState(["", "", "", "", "", "", "", ""]);
     const [status, setStatus] = useState<VerificationStatus>("idle");
     const [errorMessage, setErrorMessage] = useState("");
-    const [resendTimer, setResendTimer] = useState(0);
-    const [isResending, setIsResending] = useState(false);
     const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
-
-    // Resend cooldown timer
-    useEffect(() => {
-        if (resendTimer > 0) {
-            const timer = setTimeout(() => setResendTimer(resendTimer - 1), 1000);
-            return () => clearTimeout(timer);
-        }
-    }, [resendTimer]);
 
     // Auto-focus first input on mount
     useEffect(() => {
@@ -46,7 +37,7 @@ export default function VerifyClient() {
         }
 
         // Auto-focus next field
-        if (value && index < 5) {
+        if (value && index < 7) {
             inputRefs.current[index + 1]?.focus();
         }
     };
@@ -61,7 +52,7 @@ export default function VerifyClient() {
     // Handle paste
     const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
         e.preventDefault();
-        const pastedData = e.clipboardData.getData("text").replace(/\D/g, "").slice(0, 6);
+        const pastedData = e.clipboardData.getData("text").replace(/\D/g, "").slice(0, 8);
 
         if (pastedData) {
             const newOtp = [...otp];
@@ -71,7 +62,7 @@ export default function VerifyClient() {
             setOtp(newOtp);
 
             // Focus last filled field
-            const lastFilledIndex = Math.min(pastedData.length - 1, 5);
+            const lastFilledIndex = Math.min(pastedData.length - 1, 7);
             inputRefs.current[lastFilledIndex]?.focus();
         }
     };
@@ -90,26 +81,22 @@ export default function VerifyClient() {
         setErrorMessage("");
 
         try {
-            // TODO: Integrate with Supabase verifyOtp
-            // const { data, error } = await supabase.auth.verifyOtp({
-            //     email: email,
-            //     token: otpCode,
-            //     type: "email",
-            // });
-            //
-            // if (error) {
-            //     if (error.message.includes("expired")) {
-            //         setStatus("expired");
-            //         setErrorMessage("This code has expired. Request a new one.");
-            //     } else {
-            //         setStatus("error");
-            //         setErrorMessage("Invalid code. Please try again.");
-            //     }
-            //     return;
-            // }
+            const { error } = await supabase.auth.verifyOtp({
+                email,
+                token: otpCode,
+                type: "signup",
+            });
 
-            // Simulate verification delay
-            await new Promise((resolve) => setTimeout(resolve, 1000));
+            if (error) {
+                if (error.message.toLowerCase().includes("expired")) {
+                    setStatus("expired");
+                    setErrorMessage("This code has expired. Request a new one.");
+                } else {
+                    setStatus("error");
+                    setErrorMessage("Invalid code. Please try again.");
+                }
+                return;
+            }
 
             setStatus("success");
             setTimeout(() => {
@@ -123,33 +110,6 @@ export default function VerifyClient() {
     };
 
     // Handle resend
-    const handleResend = async () => {
-        if (resendTimer > 0 || !email) return;
-
-        setIsResending(true);
-        setErrorMessage("");
-
-        try {
-            // TODO: Integrate with Supabase resendEmailOtp
-            // const { error } = await supabase.auth.resendEmailOtp({
-            //     email: email,
-            // });
-            //
-            // if (error) {
-            //     setErrorMessage("Failed to resend code. Please try again.");
-            //     return;
-            // }
-
-            setResendTimer(60);
-            setOtp(["", "", "", "", "", ""]);
-            inputRefs.current[0]?.focus();
-        } catch (error) {
-            setErrorMessage("Failed to resend code. Please try again.");
-            console.error("Resend error:", error);
-        } finally {
-            setIsResending(false);
-        }
-    };
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-white px-4">
@@ -158,7 +118,7 @@ export default function VerifyClient() {
                 <div className="mb-8 text-center">
                     <h1 className="text-2xl font-semibold text-gray-900 mb-2">Verify your email</h1>
                     <p className="text-sm text-gray-600">
-                        We sent a 6-digit code to <span className="font-medium">{email || "your email"}</span>. Enter it below to continue.
+                        We sent a 8-digit code to <span className="font-medium">{email || "your email"}</span>. Enter it below to continue.
                     </p>
                 </div>
 
@@ -228,14 +188,9 @@ export default function VerifyClient() {
 
                 {/* Resend Section */}
                 <div className="mt-6 text-center">
-                    <p className="text-sm text-gray-600 mb-2">Didn't receive the code?</p>
-                    <button
-                        onClick={handleResend}
-                        disabled={resendTimer > 0 || isResending || !email}
-                        className="text-gray-900 font-medium text-sm hover:underline disabled:text-gray-400 disabled:cursor-not-allowed transition-colors"
-                    >
-                        {resendTimer > 0 ? `Resend in ${resendTimer}s` : "Resend email"}
-                    </button>
+                    <p className="text-sm text-gray-600">
+                        Didn't receive the code? Check your spam folder or contact support.
+                    </p>
                 </div>
 
                 {/* Security Note */}
