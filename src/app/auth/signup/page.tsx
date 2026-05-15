@@ -64,7 +64,7 @@ export default function CustomerSignup() {
         setIsLoading(true);
 
         try {
-            const response = await fetch("http://localhost:3000/users/auth/signup", {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/auth/signup`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -174,11 +174,10 @@ export default function CustomerSignup() {
                                 type="text"
                                 value={formData.fullName}
                                 onChange={handleChange}
-                                className={`w-full px-4 py-2.5 border rounded-lg text-sm transition-colors ${
-                                    errors.fullName
+                                className={`w-full px-4 py-2.5 border rounded-lg text-sm transition-colors ${errors.fullName
                                         ? "border-red-300 bg-red-50"
                                         : "border-gray-300 bg-white focus:border-gray-900 focus:ring-0"
-                                } focus:outline-none`}
+                                    } focus:outline-none`}
                                 placeholder="John Doe"
                             />
                             {errors.fullName && (
@@ -197,11 +196,10 @@ export default function CustomerSignup() {
                                 type="email"
                                 value={formData.email}
                                 onChange={handleChange}
-                                className={`w-full px-4 py-2.5 border rounded-lg text-sm transition-colors ${
-                                    errors.email
+                                className={`w-full px-4 py-2.5 border rounded-lg text-sm transition-colors ${errors.email
                                         ? "border-red-300 bg-red-50"
                                         : "border-gray-300 bg-white focus:border-gray-900 focus:ring-0"
-                                } focus:outline-none`}
+                                    } focus:outline-none`}
                                 placeholder="name@example.com"
                             />
                             {errors.email && (
@@ -220,11 +218,10 @@ export default function CustomerSignup() {
                                 type="password"
                                 value={formData.password}
                                 onChange={handleChange}
-                                className={`w-full px-4 py-2.5 border rounded-lg text-sm transition-colors ${
-                                    errors.password
+                                className={`w-full px-4 py-2.5 border rounded-lg text-sm transition-colors ${errors.password
                                         ? "border-red-300 bg-red-50"
                                         : "border-gray-300 bg-white focus:border-gray-900 focus:ring-0"
-                                } focus:outline-none`}
+                                    } focus:outline-none`}
                                 placeholder="At least 8 characters"
                             />
                             {errors.password && (
@@ -243,11 +240,10 @@ export default function CustomerSignup() {
                                 type="password"
                                 value={formData.confirmPassword}
                                 onChange={handleChange}
-                                className={`w-full px-4 py-2.5 border rounded-lg text-sm transition-colors ${
-                                    errors.confirmPassword
+                                className={`w-full px-4 py-2.5 border rounded-lg text-sm transition-colors ${errors.confirmPassword
                                         ? "border-red-300 bg-red-50"
                                         : "border-gray-300 bg-white focus:border-gray-900 focus:ring-0"
-                                } focus:outline-none`}
+                                    } focus:outline-none`}
                                 placeholder="Confirm your password"
                             />
                             {errors.confirmPassword && (
