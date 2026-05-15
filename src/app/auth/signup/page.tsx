@@ -105,23 +105,35 @@ export default function CustomerSignup() {
     return (
         <div className="flex h-screen bg-white">
             {/* Left Panel - Information */}
-            <div className="hidden md:flex flex-col w-1/2 bg-gray-50 p-12 justify-between">
-                <div>
+            <div
+                className="hidden md:flex flex-col w-1/2 p-12 justify-between relative text-white"
+                style={{
+                    backgroundImage: 'url(/signup.jpg)',
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat",
+                }}
+            >
+                {/* Red overlay */}
+                <div className="absolute inset-0 bg-red-900/65" />
+
+                {/* Content (above overlay) */}
+                <div className="relative z-10">
                     {/* Logo */}
                     <div className="flex items-center gap-2">
-                        <img src="/Kliyente.png" alt="GLG Pharmacy" className="w-8 h-8" />
                         <div className="flex items-baseline gap-1">
-                            <span className="text-xl font-semibold text-gray-900">GLG</span>
-                            <span className="text-sm text-gray-600">Pharmacy</span>
+                            <span className="text-[35px] font-semibold text-white">GLG</span>
+                            <span className="text-[25px] text-white/80">Pharmacy</span>
                         </div>
                     </div>
 
                     {/* Info Section */}
                     <div className="mt-16">
-                        <h2 className="text-2xl font-semibold text-gray-900 mb-6">
+                        <h2 className="text-2xl font-semibold text-white mb-6">
                             Secure access to your prescriptions and orders
                         </h2>
-                        <div className="space-y-4 text-gray-600 text-sm leading-relaxed">
+
+                        <div className="space-y-4 text-sm leading-relaxed text-white/80">
                             <p>✓ View and manage your prescription history</p>
                             <p>✓ Track medication deliveries in real-time</p>
                             <p>✓ Store medical records safely in one place</p>
@@ -130,8 +142,8 @@ export default function CustomerSignup() {
                     </div>
                 </div>
 
-                {/* Footer trust text */}
-                <p className="text-xs text-gray-500 leading-relaxed">
+                {/* Footer */}
+                <p className="relative z-10 text-xs text-white/70 leading-relaxed">
                     Your data is encrypted and used only for account and prescription management. We comply with healthcare data protection standards.
                 </p>
             </div>
@@ -175,8 +187,8 @@ export default function CustomerSignup() {
                                 value={formData.fullName}
                                 onChange={handleChange}
                                 className={`w-full px-4 py-2.5 border rounded-lg text-sm transition-colors ${errors.fullName
-                                        ? "border-red-300 bg-red-50"
-                                        : "border-gray-300 bg-white focus:border-gray-900 focus:ring-0"
+                                    ? "border-red-300 bg-red-50"
+                                    : "border-gray-300 bg-white focus:border-gray-900 focus:ring-0"
                                     } focus:outline-none`}
                                 placeholder="John Doe"
                             />
@@ -197,8 +209,8 @@ export default function CustomerSignup() {
                                 value={formData.email}
                                 onChange={handleChange}
                                 className={`w-full px-4 py-2.5 border rounded-lg text-sm transition-colors ${errors.email
-                                        ? "border-red-300 bg-red-50"
-                                        : "border-gray-300 bg-white focus:border-gray-900 focus:ring-0"
+                                    ? "border-red-300 bg-red-50"
+                                    : "border-gray-300 bg-white focus:border-gray-900 focus:ring-0"
                                     } focus:outline-none`}
                                 placeholder="name@example.com"
                             />
@@ -219,8 +231,8 @@ export default function CustomerSignup() {
                                 value={formData.password}
                                 onChange={handleChange}
                                 className={`w-full px-4 py-2.5 border rounded-lg text-sm transition-colors ${errors.password
-                                        ? "border-red-300 bg-red-50"
-                                        : "border-gray-300 bg-white focus:border-gray-900 focus:ring-0"
+                                    ? "border-red-300 bg-red-50"
+                                    : "border-gray-300 bg-white focus:border-gray-900 focus:ring-0"
                                     } focus:outline-none`}
                                 placeholder="At least 8 characters"
                             />
@@ -241,8 +253,8 @@ export default function CustomerSignup() {
                                 value={formData.confirmPassword}
                                 onChange={handleChange}
                                 className={`w-full px-4 py-2.5 border rounded-lg text-sm transition-colors ${errors.confirmPassword
-                                        ? "border-red-300 bg-red-50"
-                                        : "border-gray-300 bg-white focus:border-gray-900 focus:ring-0"
+                                    ? "border-red-300 bg-red-50"
+                                    : "border-gray-300 bg-white focus:border-gray-900 focus:ring-0"
                                     } focus:outline-none`}
                                 placeholder="Confirm your password"
                             />
@@ -255,7 +267,7 @@ export default function CustomerSignup() {
                         <button
                             type="submit"
                             disabled={isLoading}
-                            className="w-full bg-gray-900 hover:bg-gray-800 disabled:bg-gray-400 text-white font-medium py-2.5 px-4 rounded-lg transition-colors mt-6 text-sm"
+                            className="w-full bg-red-900 hover:bg-red-800 disabled:bg-gray-400 text-white font-medium py-2.5 px-4 rounded-lg transition-colors mt-6 text-sm cursor-pointer"
                         >
                             {isLoading ? "Creating account..." : "Create account"}
                         </button>

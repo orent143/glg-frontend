@@ -90,7 +90,7 @@ export default function Topbar() {
           <button
             onClick={() => setIsAccountMenuOpen(!isAccountMenuOpen)}
             aria-label="Account options"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-300 text-slate-700 transition hover:border-sky-500 hover:text-sky-600"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-300 text-slate-700 transition hover:border-sky-500 hover:text-sky-600 cursor-pointer"
           >
             <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8">
               <path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" />

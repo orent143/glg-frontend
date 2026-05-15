@@ -96,24 +96,35 @@ export default function CustomerSignin() {
 
     return (
         <div className="flex h-screen bg-white">
-            {/* Left Panel - Information */}
-            <div className="hidden md:flex flex-col w-1/2 bg-gray-50 p-12 justify-between">
-                <div>
+              {/* Left Panel - Information */}
+            <div
+                className="hidden md:flex flex-col w-1/2 p-12 justify-between relative text-white"
+                style={{
+                    backgroundImage: 'url(/signin.jpg)',
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat",
+                }}
+            >
+                {/* Red overlay */}
+                <div className="absolute inset-0 bg-red-900/65" />
+
+                {/* Content (above overlay) */}
+                <div className="relative z-10">
                     {/* Logo */}
                     <div className="flex items-center gap-2">
-                        <img src="/Kliyente.png" alt="GLG Pharmacy" className="w-8 h-8" />
                         <div className="flex items-baseline gap-1">
-                            <span className="text-xl font-semibold text-[#A70000]">GLG</span>
-                            <span className="text-sm text-gray-600">Pharmacy</span>
+                            <span className="text-[35px] font-semibold text-white">GLG</span>
+                            <span className="text-[25px] text-white/80">Pharmacy</span>
                         </div>
                     </div>
 
                     {/* Info Section */}
                     <div className="mt-16">
-                        <h2 className="text-2xl font-semibold text-gray-900 mb-6">
+                        <h2 className="text-2xl font-semibold text-white-900 mb-6">
                             Manage your prescriptions with confidence
                         </h2>
-                        <div className="space-y-4 text-gray-600 text-sm leading-relaxed">
+                        <div className="space-y-4 text-sm leading-relaxed text-white/80">
                             <p>✓ Quick and secure access to your account</p>
                             <p>✓ Track all your medication orders and deliveries</p>
                             <p>✓ View your complete prescription history</p>
@@ -123,7 +134,7 @@ export default function CustomerSignin() {
                 </div>
 
                 {/* Footer trust text */}
-                <p className="text-xs text-gray-500 leading-relaxed">
+                <p className="relative z-10 text-xs text-white/70 leading-relaxed">
                     Your login is protected with encryption. We comply with healthcare data protection standards and never share your information.
                 </p>
             </div>
@@ -213,7 +224,7 @@ export default function CustomerSignin() {
                         <button
                             type="submit"
                             disabled={isLoading}
-                            className="w-full bg-gray-900 hover:bg-gray-800 disabled:bg-gray-400 text-white font-medium py-2.5 px-4 rounded-lg transition-colors mt-6 text-sm"
+                            className="w-full bg-red-900 hover:bg-red-800 disabled:bg-gray-400 text-white font-medium py-2.5 px-4 rounded-lg transition-colors mt-6 text-sm cursor-pointer"
                         >
                             {isLoading ? "Signing in..." : "Sign in"}
                         </button>
