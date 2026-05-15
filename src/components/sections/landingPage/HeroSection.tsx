@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import heroImage from "../../assets/image7(1).png";
-import { heroActions } from "../../routes/siteRoutes";
+import heroImage from "@/src/assets/image7(1).png";
+import { heroActions } from "../../../routes/siteRoutes";
 
 export default function HeroSection() {
   return (

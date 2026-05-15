@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import ProductCard, { Product } from './ProductCard';
-import { useHorizontalScrollNav } from './hooks/useHorizontalScrollNav';
+import { useHorizontalScrollNav } from '../hooks/useHorizontalScrollNav';
 
 const discountedProducts: Product[] = [
   {

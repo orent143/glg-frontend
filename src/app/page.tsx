@@ -1,15 +1,15 @@
-import HeroSection from "../components/sections/HeroSection";
+import HeroSection from "../components/sections/landingPage/HeroSection";
 import Navbar from "../components/layout/Navbar";
 import Topbar from "../components/layout/Topbar";
-import FeaturedBrands from "../components/sections/FeaturedBrands";
-import Categories from "../components/sections/Categories";
-import Promos, { PromoCardOnly } from "../components/sections/Promos";
-import DiscountedProducts from "../components/sections/DiscountedProducts";
-import BestSellingProducts from "../components/sections/BestSellingProducts";
-import FeaturedProducts from "../components/sections/FeaturedProducts";
-import UploadPrescription from "../components/sections/UploadPrescription";
-import HealthTips from "../components/sections/HealthTips";
-import Testimonials from "../components/sections/Testimonials";
+import FeaturedBrands from "../components/sections/landingPage/FeaturedBrands";
+import Categories from "../components/sections/landingPage/Categories";
+import Promos, { PromoCardOnly } from "../components/sections/landingPage/Promos";
+import DiscountedProducts from "../components/sections/landingPage/DiscountedProducts";
+import BestSellingProducts from "../components/sections/landingPage/BestSellingProducts";
+import FeaturedProducts from "../components/sections/landingPage/FeaturedProducts";
+import UploadPrescription from "../components/sections/landingPage/UploadPrescription";
+import HealthTips from "../components/sections/landingPage/HealthTips";
+import Testimonials from "../components/sections/landingPage/Testimonials";
 import Footer from "../components/layout/Footer";
 
 export default function Home() {
@@ -19,7 +19,6 @@ export default function Home() {
         <Topbar />
         <Navbar />
       </header>
-
       <main>
         <HeroSection />
         <FeaturedBrands />
