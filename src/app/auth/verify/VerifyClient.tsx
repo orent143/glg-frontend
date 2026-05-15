@@ -1,8 +1,8 @@
 'use client';
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { supabase } from "@/src/lib/supabaseClient";
+import { getSupabaseClient } from "@/src/lib/supabaseClient";
 
 type VerificationStatus = "idle" | "loading" | "success" | "error" | "expired";
 
@@ -10,6 +10,7 @@ export default function VerifyClient() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const email = searchParams.get("email") || "";
+    const supabase = useMemo(() => getSupabaseClient(), []);
 
     const [otp, setOtp] = useState(["", "", "", "", "", "", "", ""]);
     const [status, setStatus] = useState<VerificationStatus>("idle");
