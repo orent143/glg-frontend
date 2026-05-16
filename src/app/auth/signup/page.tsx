@@ -72,7 +72,7 @@ export default function CustomerSignup() {
                 body: JSON.stringify({
                     email: formData.email,
                     password: formData.password,
-                    fullName: formData.fullName,
+                    full_name: formData.fullName,
                 }),
             });
 
@@ -86,12 +86,10 @@ export default function CustomerSignup() {
                         errorMessage = errorData.message;
                     }
                 } catch {
-                    // Ignore JSON parsing errors and fall back to default message.
                 }
                 throw new Error(errorMessage);
             }
 
-            // Redirect to verification page
             router.push("/auth/verify?email=" + encodeURIComponent(formData.email));
         } catch (error) {
             setSubmitError(
